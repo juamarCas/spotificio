@@ -18,7 +18,6 @@ app.use(cookieParser());
 function getUserInfo(accessToken) {
   if (!accessToken) {
     return Promise.resolve(null);
-    console.log("Nada que ver");
   }
 
   const options = {
@@ -61,31 +60,6 @@ function getUserFollows(accessToken) {
   });
 }
 
-function checkIfUserFollows(accessToken, userId) {
-    console.log(userId);
-  if (!accessToken) {
-    return Promise.resolve(null);
-  }
-
-   
-
-  const options = {
-    url: `https://api.spotify.com/v1/me/following/contains?type=user&ids=${userId}`,
-    headers: { Authorization: `Bearer ${accessToken}` },
-    json: true,
-  };
-
-  return new Promise((resolve, reject) => {
-    request.get(options, (err, res, body) => {
-      if (err || res.statusCode !== 200) {
-        reject(err);
-      }
-      resolve(body);
-      console.log(body);
-    });
-  });
-}
-
 app.get("/login", function (req, res) {
   const state = generateRandomString(16);
   //console.log(state);
@@ -116,7 +90,6 @@ app.get("/following", async (req, res, next) => {
     console.log("Hola");
     const userInfo = await getUserInfo(accessToken);
     //console.log(userInfo); 
-    const isFollowing = await checkIfUserFollows(accessToken, userInfo.id)
     const userFollowing = await getUserFollows(accessToken);
     console.log(userFollowing.artists); 
    // console.log(userFollowing);
