@@ -12,10 +12,6 @@ app.use(cors());
 app.use(cookieParser());
 app.use('/', spotifyRouter); 
 
-
-
-
-
 app.listen(app.get("port"), () => {
   console.log("server on port", app.get("port"));
 });

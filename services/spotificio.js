@@ -1,4 +1,3 @@
-
 const request = require("request");
 
 class Spotificio {
@@ -9,32 +8,43 @@ class Spotificio {
       return Promise.resolve(null);
     }
 
-    const options = {
-      url: "https://api.spotify.com/v1/me",
-      headers: { Authorization: `Bearer ${accessToken}` },
-      json: true,
-    };
-
-    return new Promise((resolve, reject) => {
-      request.get(options, function (error, response, body) {
-        if (error || response.statusCode !== 200) {
-          reject(error);
-        }
-
-        resolve(body);
-        //console.log(body);
+    const link = "https://api.spotify.com/v1/me"; 
+    return new Promise((resolve, rej) => {
+        this.getQuery(link, accessToken).then((res) => {
+          resolve(res);
+        });
       });
-    });
   }
 
   getUserFollows(accessToken) {
     if (!accessToken) {
       return Promise.resolve(null);
     }
+    const link = "https://api.spotify.com/v1/me/following?type=artist";
 
+    return new Promise((resolve, rej) => {
+      this.getQuery(link, accessToken).then((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getArtistsAlbums(accessToken, artistId) {
+    if (!accessToken) {
+      return Promise.resolve(null);
+    }
+    const link = `https://api.spotify.com/v1/artists/${artistId}/albums`;
+    return new Promise((resolve, rej) => {
+      this.getQuery(link, accessToken).then((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  getQuery(link, token) {
     const options = {
-      url: "https://api.spotify.com/v1/me/following?type=artist",
-      headers: { Authorization: `Bearer ${accessToken}` },
+      url: link,
+      headers: { Authorization: `Bearer ${token}` },
       json: true,
     };
 
@@ -43,13 +53,10 @@ class Spotificio {
         if (err || res.statusCode !== 200) {
           rej(err);
         }
-
         resolve(body);
       });
     });
   }
-
-  getArtistsAlbum(accessToken) {}
 }
 
-module.exports = Spotificio; 
+module.exports = Spotificio;

@@ -35,15 +35,17 @@ router.get("/following", async (req, res, next) => {
   res.send("following");
   if (!accessToken) {
     return res.redirect("/");
-  }
+  } 
 
   try {
-
+//0RqtSIYZmd 4fiBKVFqyIqD
     const userInfo = await spotify.getUserInfo(accessToken);
     //console.log(userInfo);
     const userFollowing = await spotify.getUserFollows(accessToken);
-    console.log(userFollowing.artists);
-    // console.log(userFollowing);
+    //console.log(userFollowing.artists.items[0].id);
+    const followedAlbums = await spotify.getArtistsAlbums(accessToken, userFollowing.artists.items[1].id)
+    console.log(followedAlbums); 
+  
   } catch (e) {
     next(e);
   }
