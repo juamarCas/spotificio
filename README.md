@@ -3,7 +3,7 @@ This is a simple app that shows you the artist you follow on Spotify,
 and show you new releases in a given time
 
 ## Config
-Config a .env file like this way and fill the parameters
+Create a .env file like this way and fill the parameters
 ```
 CLIENT_ID = 
 CLIENT_SECRET =
