@@ -12,7 +12,7 @@ const router = express.Router();
 const spotify = new Spotificio(); 
 
 router.get("/", async (req, res, next) => {
-  res.send("Hello world");
+  res.render('layouts/main'); 
 });
 
 router.get("/login", function (req, res) {
