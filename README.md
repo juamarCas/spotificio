@@ -12,3 +12,6 @@ PORT =
 CALLBACK_URL = 
 ```
 
+Main image taken from:
+https://www.goodfon.com/wallpaper/4k-ultra-hd-background-blur-effect-bokeh-long-exposure-photo.html
+
