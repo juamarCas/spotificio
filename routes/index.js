@@ -11,7 +11,7 @@ const router = express.Router();
 
 const spotify = new Spotificio(); 
 
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res, next) => { 
   res.render('layouts/main'); 
 });
 
@@ -44,7 +44,7 @@ router.get("/following", async (req, res, next) => {
     const userFollowing = await spotify.getUserFollows(accessToken);
     //console.log(userFollowing.artists.items[0].id);
     const followedAlbums = await spotify.getArtistsAlbums(accessToken, userFollowing.artists.items[1].id)
-    console.log(followedAlbums); 
+    //console.log(followedAlbums.items[0].images[0]); 
   
   } catch (e) {
     next(e);
